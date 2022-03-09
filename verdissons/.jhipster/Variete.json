@@ -1,0 +1,47 @@
+{
+  "changelogDate": "20220309090201",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nomLatin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "conseilCulture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "culture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exposition",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "besoinEau",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "natureSol",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualiteSol",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Variete",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "genre",
+      "relationshipName": "genre",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,23 @@
+{
+  "changelogDate": "20220309085732",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Genre",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "famille",
+      "relationshipName": "famille",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
