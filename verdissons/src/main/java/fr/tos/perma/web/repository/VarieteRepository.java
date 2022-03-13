@@ -27,14 +27,14 @@ public interface VarieteRepository extends JpaRepository<Variete, Long> {
     }
 
     @Query(
-        value = "select distinct variete from Variete variete left join fetch variete.genre",
+        value = "select distinct variete from Variete variete left join fetch variete.espece",
         countQuery = "select count(distinct variete) from Variete variete"
     )
     Page<Variete> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select distinct variete from Variete variete left join fetch variete.genre")
+    @Query("select distinct variete from Variete variete left join fetch variete.espece")
     List<Variete> findAllWithToOneRelationships();
 
-    @Query("select variete from Variete variete left join fetch variete.genre where variete.id =:id")
+    @Query("select variete from Variete variete left join fetch variete.espece where variete.id =:id")
     Optional<Variete> findOneWithToOneRelationships(@Param("id") Long id);
 }

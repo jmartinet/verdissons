@@ -1,16 +1,16 @@
 package fr.tos.perma.web.service.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import fr.tos.perma.web.domain.Genre;
+import fr.tos.perma.web.service.dto.GenreDTO;
 
 class GenreMapperTest {
 
-    private GenreMapper genreMapper;
+	private BotanicItemMapper<Genre, GenreDTO> genreMapper;
 
     @BeforeEach
     public void setUp() {
-        genreMapper = new GenreMapperImpl();
+        genreMapper = new BotanicItemMapper<Genre, GenreDTO>();
     }
 }

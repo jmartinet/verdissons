@@ -20,8 +20,8 @@
         </dd>
         <dt><span>Famille</span></dt>
         <dd>
-          <div *ngIf="genre.famille">
-            <a [routerLink]="['/famille', genre.famille?.id, 'view']">{{ genre.famille?.nom }}</a>
+          <div *ngIf="genre.parent">
+            <a [routerLink]="['/famille', genre.parent?.id, 'view']">{{ genre.parent?.nom }}</a>
           </div>
         </dd>
       </dl>

@@ -1,16 +1,16 @@
 package fr.tos.perma.web.service.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import fr.tos.perma.web.domain.Famille;
+import fr.tos.perma.web.service.dto.FamilleDTO;
 
 class FamilleMapperTest {
 
-    private FamilleMapper familleMapper;
+	private BotanicItemMapper<Famille, FamilleDTO> familleMapper;
 
-    @BeforeEach
-    public void setUp() {
-        familleMapper = new FamilleMapperImpl();
-    }
+	@BeforeEach
+	public void setUp() {
+		familleMapper = new BotanicItemMapper<Famille, FamilleDTO>();
+	}
 }

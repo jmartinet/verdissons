@@ -3,7 +3,7 @@
     <span>Genres</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Refresh List</span>
       </button>
@@ -31,10 +31,10 @@
   <div class="table-responsive" id="entities" *ngIf="genres && genres.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span>ID</span></th>
-          <th scope="col"><span>Nom</span></th>
-          <th scope="col"><span>Famille</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="famille"><span>Famille</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -45,8 +45,8 @@
           </td>
           <td>{{ genre.nom }}</td>
           <td>
-            <div *ngIf="genre.famille">
-              <a [routerLink]="['/famille', genre.famille?.id, 'view']">{{ genre.famille?.nom }}</a>
+            <div *ngIf="genre.parent">
+              <a [routerLink]="['/famille', genre.parent?.id, 'view']">{{ genre.parent?.nom }}</a>
             </div>
           </td>
           <td class="text-end">
@@ -70,5 +70,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="genres && genres.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="SemenceHeading">
+    <span>Semences</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-semence"
+        [routerLink]="['/semence/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Semence </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="semences?.length === 0">
+    <span>No semences found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="semences && semences.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Type Semis</span></th>
+          <th scope="col"><span>Conseil Semis</span></th>
+          <th scope="col"><span>Periode Semis Debut</span></th>
+          <th scope="col"><span>Periode Semis Fin</span></th>
+          <th scope="col"><span>Variete</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let semence of semences; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/semence', semence.id, 'view']">{{ semence.id }}</a>
+          </td>
+          <td>{{ semence.typeSemis }}</td>
+          <td>{{ semence.conseilSemis }}</td>
+          <td>{{ semence.periodeSemisDebut | formatMediumDate }}</td>
+          <td>{{ semence.periodeSemisFin | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="semence.variete">
+              <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nomLatin }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/semence', semence.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/semence', semence.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(semence)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

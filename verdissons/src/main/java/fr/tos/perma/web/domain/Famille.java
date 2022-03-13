@@ -1,78 +1,40 @@
 package fr.tos.perma.web.domain;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-/**
- * A Famille.
- */
 @Entity
-@Table(name = "famille")
-public class Famille implements Serializable {
+@DiscriminatorValue("FAMILLE")
+public class Famille extends BotanicItem {
 
-    private static final long serialVersionUID = 1L;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getLibelle() == null) ? 0 : getLibelle().hashCode());
+		return result;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Famille other = (Famille) obj;
+		if (getLibelle() == null) {
+			if (other.getLibelle() != null)
+				return false;
+		} else if (!getLibelle().equals(other.getLibelle()))
+			return false;
+		return true;
+	}
 
-    @Column(name = "nom")
-    private String nom;
+	@Override
+	public String toString() {
+		return "Famille [libelle=" + getLibelle() + "]";
+	}
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public Famille id(Long id) {
-        this.setId(id);
-        return this;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return this.nom;
-    }
-
-    public Famille nom(String nom) {
-        this.setNom(nom);
-        return this;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Famille)) {
-            return false;
-        }
-        return id != null && id.equals(((Famille) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "Famille{" +
-            "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            "}";
-    }
 }

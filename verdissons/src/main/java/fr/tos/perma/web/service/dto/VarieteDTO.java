@@ -24,7 +24,7 @@ public class VarieteDTO implements Serializable {
 
     private String qualiteSol;
 
-    private GenreDTO genre;
+    private EspeceDTO espece;
 
     public Long getId() {
         return id;
@@ -90,12 +90,12 @@ public class VarieteDTO implements Serializable {
         this.qualiteSol = qualiteSol;
     }
 
-    public GenreDTO getGenre() {
-        return genre;
+    public EspeceDTO getEspece() {
+        return espece;
     }
 
-    public void setGenre(GenreDTO genre) {
-        this.genre = genre;
+	public void setEspece(EspeceDTO genre) {
+        this.espece = genre;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class VarieteDTO implements Serializable {
             ", besoinEau='" + getBesoinEau() + "'" +
             ", natureSol='" + getNatureSol() + "'" +
             ", qualiteSol='" + getQualiteSol() + "'" +
-            ", genre=" + getGenre() +
+            ", genre=" + getEspece() +
             "}";
     }
 }

@@ -19,6 +19,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Varietes' },
         loadChildren: () => import('./variete/variete.module').then(m => m.VarieteModule),
       },
+      {
+        path: 'semence',
+        data: { pageTitle: 'Semences' },
+        loadChildren: () => import('./semence/semence.module').then(m => m.SemenceModule),
+      },
+      {
+        path: 'espece',
+        data: { pageTitle: 'Especes' },
+        loadChildren: () => import('./espece/espece.module').then(m => m.EspeceModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

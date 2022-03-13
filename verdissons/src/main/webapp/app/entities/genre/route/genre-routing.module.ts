@@ -11,6 +11,9 @@ const genreRoute: Routes = [
   {
     path: '',
     component: GenreComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

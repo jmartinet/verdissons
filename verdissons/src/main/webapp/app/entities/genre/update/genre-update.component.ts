@@ -81,10 +81,10 @@ export class GenreUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: genre.id,
       nom: genre.nom,
-      famille: genre.famille,
+      famille: genre.parent,
     });
 
-    this.famillesSharedCollection = this.familleService.addFamilleToCollectionIfMissing(this.famillesSharedCollection, genre.famille);
+    this.famillesSharedCollection = this.familleService.addFamilleToCollectionIfMissing(this.famillesSharedCollection, genre.parent);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -102,7 +102,7 @@ export class GenreUpdateComponent implements OnInit {
       ...new Genre(),
       id: this.editForm.get(['id'])!.value,
       nom: this.editForm.get(['nom'])!.value,
-      famille: this.editForm.get(['famille'])!.value,
+      parent: this.editForm.get(['famille'])!.value,
     };
   }
 }

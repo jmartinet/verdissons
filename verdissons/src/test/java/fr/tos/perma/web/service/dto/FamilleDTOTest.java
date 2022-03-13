@@ -11,12 +11,12 @@ class FamilleDTOTest {
     void dtoEqualsVerifier() throws Exception {
         TestUtil.equalsVerifier(FamilleDTO.class);
         FamilleDTO familleDTO1 = new FamilleDTO();
-        familleDTO1.setId(1L);
+        familleDTO1.setId(1);
         FamilleDTO familleDTO2 = new FamilleDTO();
         assertThat(familleDTO1).isNotEqualTo(familleDTO2);
         familleDTO2.setId(familleDTO1.getId());
         assertThat(familleDTO1).isEqualTo(familleDTO2);
-        familleDTO2.setId(2L);
+        familleDTO2.setId(2);
         assertThat(familleDTO1).isNotEqualTo(familleDTO2);
         familleDTO1.setId(null);
         assertThat(familleDTO1).isNotEqualTo(familleDTO2);

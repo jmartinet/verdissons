@@ -3,7 +3,7 @@ import { IFamille } from 'app/entities/famille/famille.model';
 export interface IGenre {
   id?: number;
   nom?: string | null;
-  famille?: IFamille | null;
+  parent?: IFamille | null;
 }
 
 export class Genre implements IGenre {

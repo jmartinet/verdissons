@@ -1,16 +1,15 @@
 package fr.tos.perma.web.service.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import fr.tos.perma.web.service.mapper.impl.VarieteMapperImpl;
 
 class VarieteMapperTest {
 
-    private VarieteMapper varieteMapper;
+	private VarieteMapper varieteMapper;
 
-    @BeforeEach
-    public void setUp() {
-        varieteMapper = new VarieteMapperImpl();
-    }
+	@BeforeEach
+	public void setUp() {
+		varieteMapper = new VarieteMapperImpl();
+	}
 }

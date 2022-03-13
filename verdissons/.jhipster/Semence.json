@@ -1,0 +1,35 @@
+{
+  "changelogDate": "20220309105051",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "typeSemis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "conseilSemis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "periodeSemisDebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "periodeSemisFin",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Semence",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nomLatin",
+      "otherEntityName": "variete",
+      "relationshipName": "variete",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

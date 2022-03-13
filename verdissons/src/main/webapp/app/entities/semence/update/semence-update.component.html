@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-semence-heading" data-cy="SemenceCreateUpdateHeading">Create or edit a Semence</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_typeSemis">Type Semis</label>
+          <input type="text" class="form-control" name="typeSemis" id="field_typeSemis" data-cy="typeSemis" formControlName="typeSemis" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_conseilSemis">Conseil Semis</label>
+          <input
+            type="text"
+            class="form-control"
+            name="conseilSemis"
+            id="field_conseilSemis"
+            data-cy="conseilSemis"
+            formControlName="conseilSemis"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_periodeSemisDebut">Periode Semis Debut</label>
+          <div class="input-group">
+            <input
+              id="field_periodeSemisDebut"
+              data-cy="periodeSemisDebut"
+              type="text"
+              class="form-control"
+              name="periodeSemisDebut"
+              ngbDatepicker
+              #periodeSemisDebutDp="ngbDatepicker"
+              formControlName="periodeSemisDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="periodeSemisDebutDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_periodeSemisFin">Periode Semis Fin</label>
+          <div class="input-group">
+            <input
+              id="field_periodeSemisFin"
+              data-cy="periodeSemisFin"
+              type="text"
+              class="form-control"
+              name="periodeSemisFin"
+              ngbDatepicker
+              #periodeSemisFinDp="ngbDatepicker"
+              formControlName="periodeSemisFin"
+            />
+            <button type="button" class="btn btn-secondary" (click)="periodeSemisFinDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_variete">Variete</label>
+          <select class="form-control" id="field_variete" data-cy="variete" name="variete" formControlName="variete">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="varieteOption.id === editForm.get('variete')!.value?.id ? editForm.get('variete')!.value : varieteOption"
+              *ngFor="let varieteOption of varietesSharedCollection; trackBy: trackVarieteById"
+            >
+              {{ varieteOption.nomLatin }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

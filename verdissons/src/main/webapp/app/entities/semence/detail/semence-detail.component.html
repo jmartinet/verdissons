@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="semence">
+      <h2 data-cy="semenceDetailsHeading"><span>Semence</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ semence.id }}</span>
+        </dd>
+        <dt><span>Type Semis</span></dt>
+        <dd>
+          <span>{{ semence.typeSemis }}</span>
+        </dd>
+        <dt><span>Conseil Semis</span></dt>
+        <dd>
+          <span>{{ semence.conseilSemis }}</span>
+        </dd>
+        <dt><span>Periode Semis Debut</span></dt>
+        <dd>
+          <span>{{ semence.periodeSemisDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Periode Semis Fin</span></dt>
+        <dd>
+          <span>{{ semence.periodeSemisFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Variete</span></dt>
+        <dd>
+          <div *ngIf="semence.variete">
+            <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nomLatin }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/semence', semence.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
