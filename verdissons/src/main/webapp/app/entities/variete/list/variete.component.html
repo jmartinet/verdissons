@@ -32,35 +32,31 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span>ID</span></th>
-          <th scope="col"><span>Nom Latin</span></th>
+          <th scope="col"><span>Nom commun</span></th>
+          <th scope="col"><span>Espece</span></th>
           <th scope="col"><span>Conseil Culture</span></th>
           <th scope="col"><span>Culture</span></th>
           <th scope="col"><span>Exposition</span></th>
           <th scope="col"><span>Besoin Eau</span></th>
           <th scope="col"><span>Nature Sol</span></th>
           <th scope="col"><span>Qualite Sol</span></th>
-          <th scope="col"><span>Genre</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let variete of varietes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ variete.nom }}</td>
           <td>
-            <a [routerLink]="['/variete', variete.id, 'view']">{{ variete.id }}</a>
+            <div *ngIf="variete.espece">
+              <a [routerLink]="['/espece', variete.espece?.id, 'view']">{{ variete.espece?.parent?.nom + ' ' + variete.espece?.nom }}</a>
+            </div>
           </td>
-          <td>{{ variete.nomLatin }}</td>
           <td>{{ variete.conseilCulture }}</td>
           <td>{{ variete.culture }}</td>
           <td>{{ variete.exposition }}</td>
           <td>{{ variete.besoinEau }}</td>
           <td>{{ variete.natureSol }}</td>
           <td>{{ variete.qualiteSol }}</td>
-          <td>
-            <div *ngIf="variete.genre">
-              <a [routerLink]="['/genre', variete.genre?.id, 'view']">{{ variete.genre?.nom }}</a>
-            </div>
-          </td>
           <td class="text-end">
             <div class="btn-group">
               <button

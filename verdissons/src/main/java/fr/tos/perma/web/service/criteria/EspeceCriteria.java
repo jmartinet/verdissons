@@ -7,7 +7,7 @@ import org.springdoc.api.annotations.ParameterObject;
 
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.Filter;
-import tech.jhipster.service.filter.IntegerFilter;
+import tech.jhipster.service.filter.LongFilter;
 
 /**
  * Criteria class for the {@link fr.tos.perma.web.domain.Espece} entity. This
@@ -23,7 +23,9 @@ public class EspeceCriteria implements Serializable, Criteria {
 
 	private static final long serialVersionUID = 1L;
 
-	private IntegerFilter id;
+	private LongFilter id;
+
+	private LongFilter parent;
 
 	private Boolean distinct;
 
@@ -32,6 +34,7 @@ public class EspeceCriteria implements Serializable, Criteria {
 
 	public EspeceCriteria(EspeceCriteria other) {
 		this.id = other.id == null ? null : other.id.copy();
+		this.parent = other.parent == null ? null : other.parent.copy();
 		this.distinct = other.distinct;
 	}
 
@@ -40,19 +43,34 @@ public class EspeceCriteria implements Serializable, Criteria {
 		return new EspeceCriteria(this);
 	}
 
-	public IntegerFilter getId() {
+	public LongFilter getId() {
 		return id;
 	}
 
-	public IntegerFilter id() {
+	public LongFilter id() {
 		if (id == null) {
-			id = new IntegerFilter();
+			id = new LongFilter();
 		}
 		return id;
 	}
 
-	public void setId(IntegerFilter id) {
+	public void setId(LongFilter id) {
 		this.id = id;
+	}
+
+	public LongFilter getParent() {
+		return parent;
+	}
+
+	public LongFilter parent() {
+		if (parent == null) {
+			parent = new LongFilter();
+		}
+		return parent;
+	}
+
+	public void setParent(LongFilter parent) {
+		this.parent = parent;
 	}
 
 	public Boolean getDistinct() {

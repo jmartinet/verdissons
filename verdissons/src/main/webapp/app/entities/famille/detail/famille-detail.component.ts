@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { IFamille } from '../famille.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
 
 @Component({
   selector: 'jhi-famille-detail',
   templateUrl: './famille-detail.component.html',
 })
 export class FamilleDetailComponent implements OnInit {
-  famille: IFamille | null = null;
+  famille: IBotanicItem | null = null;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

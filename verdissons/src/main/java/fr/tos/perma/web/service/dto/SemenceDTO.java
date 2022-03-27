@@ -9,7 +9,12 @@ import java.util.Objects;
  */
 public class SemenceDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String typeSemis;
 
@@ -19,7 +24,7 @@ public class SemenceDTO implements Serializable {
 
     private LocalDate periodeSemisFin;
 
-    private VarieteDTO variete;
+    private CultivarDTO cultivar;
 
     public Long getId() {
         return id;
@@ -61,13 +66,13 @@ public class SemenceDTO implements Serializable {
         this.periodeSemisFin = periodeSemisFin;
     }
 
-    public VarieteDTO getVariete() {
-        return variete;
-    }
+	public CultivarDTO getCultivar() {
+		return cultivar;
+	}
 
-    public void setVariete(VarieteDTO variete) {
-        this.variete = variete;
-    }
+	public void setCultivar(CultivarDTO cultivar) {
+		this.cultivar = cultivar;
+	}
 
     @Override
     public boolean equals(Object o) {
@@ -99,7 +104,7 @@ public class SemenceDTO implements Serializable {
             ", conseilSemis='" + getConseilSemis() + "'" +
             ", periodeSemisDebut='" + getPeriodeSemisDebut() + "'" +
             ", periodeSemisFin='" + getPeriodeSemisFin() + "'" +
-            ", variete=" + getVariete() +
+            ", cultivar=" + getCultivar() +
             "}";
     }
 }

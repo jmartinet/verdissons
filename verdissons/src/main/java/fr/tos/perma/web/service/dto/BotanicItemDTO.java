@@ -9,17 +9,19 @@ public class BotanicItemDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 
     private String nom;
 
+    private String type;
+
     private BotanicItemDTO parent;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -37,6 +39,14 @@ public class BotanicItemDTO implements Serializable {
 
 	public void setParent(BotanicItemDTO parent) {
 		this.parent = parent;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

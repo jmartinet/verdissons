@@ -1,6 +1,7 @@
 package fr.tos.perma.web.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +26,8 @@ public class Variete implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "nom_latin")
-	private String nomLatin;
+	@Column(name = "nom")
+	private String nom;
 
 	@Column(name = "conseil_culture")
 	private String conseilCulture;
@@ -48,6 +50,9 @@ public class Variete implements Serializable {
 	@ManyToOne
 	private Espece espece;
 
+	@OneToMany(mappedBy = "variete")
+	private List<Cultivar> cultivars;
+
 	// jhipster-needle-entity-add-field - JHipster will add fields here
 
 	public Long getId() {
@@ -63,17 +68,17 @@ public class Variete implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomLatin() {
-		return this.nomLatin;
+	public String getNom() {
+		return this.nom;
 	}
 
-	public Variete nomLatin(String nomLatin) {
-		this.setNomLatin(nomLatin);
+	public Variete nom(String nom) {
+		this.setNom(nom);
 		return this;
 	}
 
-	public void setNomLatin(String nomLatin) {
-		this.nomLatin = nomLatin;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public String getConseilCulture() {
@@ -186,9 +191,17 @@ public class Variete implements Serializable {
 	// prettier-ignore
 	@Override
 	public String toString() {
-		return "Variete{" + "id=" + getId() + ", nomLatin='" + getNomLatin() + "'" + ", conseilCulture='"
+		return "Variete{" + "id=" + getId() + ", nom='" + getNom() + "'" + ", conseilCulture='"
 				+ getConseilCulture() + "'" + ", culture='" + getCulture() + "'" + ", exposition='" + getExposition()
 				+ "'" + ", besoinEau='" + getBesoinEau() + "'" + ", natureSol='" + getNatureSol() + "'"
 				+ ", qualiteSol='" + getQualiteSol() + "'" + "}";
+	}
+
+	public List<Cultivar> getCultivars() {
+		return cultivars;
+	}
+
+	public void setCultivars(List<Cultivar> cultivars) {
+		this.cultivars = cultivars;
 	}
 }

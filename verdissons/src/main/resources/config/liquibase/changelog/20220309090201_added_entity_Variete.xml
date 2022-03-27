@@ -14,7 +14,7 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="nom_latin" type="varchar(255)">
+            <column name="nom" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="conseil_culture" type="varchar(255)">

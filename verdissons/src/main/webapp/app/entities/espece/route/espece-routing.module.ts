@@ -12,7 +12,7 @@ const especeRoute: Routes = [
     path: '',
     component: EspeceComponent,
     data: {
-      defaultSort: 'id,asc',
+      defaultSort: 'libelle,asc',
     },
     canActivate: [UserRouteAccessService],
   },

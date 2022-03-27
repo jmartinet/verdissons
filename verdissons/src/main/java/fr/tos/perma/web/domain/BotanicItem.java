@@ -1,5 +1,7 @@
 package fr.tos.perma.web.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -11,6 +13,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,7 +25,7 @@ public class BotanicItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@Column(name = "libelle")
 	private String libelle;
@@ -33,6 +36,9 @@ public class BotanicItem {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private BotanicItem parent;
+
+	@OneToMany(mappedBy = "parent")
+	private List<BotanicItem> children;
 
 	public String getLibelle() {
 		return libelle;
@@ -54,11 +60,11 @@ public class BotanicItem {
 		return type;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

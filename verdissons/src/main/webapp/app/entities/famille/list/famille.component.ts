@@ -4,18 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IFamille } from '../famille.model';
-
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { FamilleService } from '../service/famille.service';
 import { FamilleDeleteDialogComponent } from '../delete/famille-delete-dialog.component';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
 	selector: 'jhi-famille',
 	templateUrl: './famille.component.html',
 })
 export class FamilleComponent implements OnInit {
-	familles?: IFamille[];
+	familles?: IBotanicItem[];
 	isLoading = false;
 	totalItems = 0;
 	itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +24,7 @@ export class FamilleComponent implements OnInit {
 	ngbPaginationPage = 1;
 
 	constructor(
-		protected familleService: FamilleService,
+		protected familleService: BotanicItemService,
 		protected activatedRoute: ActivatedRoute,
 		protected router: Router,
 		protected modalService: NgbModal
@@ -36,12 +35,13 @@ export class FamilleComponent implements OnInit {
 		const pageToLoad: number = page ?? this.page ?? 1;
 
 		this.familleService.query({
+				'type.equals': 'FAMILLE',
 				page: pageToLoad - 1,
 				size: this.itemsPerPage,
 				sort: this.sort(),
 			})
 			.subscribe({
-				next: (res: HttpResponse<IFamille[]>) => {
+				next: (res: HttpResponse<IBotanicItem[]>) => {
 					this.isLoading = false;
 					this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
 				},
@@ -56,11 +56,11 @@ export class FamilleComponent implements OnInit {
 		this.handleNavigation();
 	}
 
-	trackId(index: number, item: IFamille): number {
+	trackId(index: number, item: IBotanicItem): number {
 		return item.id!;
 	}
 
-	delete(famille: IFamille): void {
+	delete(famille: IBotanicItem): void {
 		const modalRef = this.modalService.open(FamilleDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
 		modalRef.componentInstance.famille = famille;
 		// unsubscribe not needed because closed completes on modal close
@@ -94,7 +94,7 @@ export class FamilleComponent implements OnInit {
 		});
 	}
 
-	protected onSuccess(data: IFamille[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+	protected onSuccess(data: IBotanicItem[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
 		this.totalItems = Number(headers.get('X-Total-Count'));
 		this.page = page;
 		if (navigate) {

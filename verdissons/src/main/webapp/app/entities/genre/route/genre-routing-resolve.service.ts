@@ -4,14 +4,15 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IGenre, Genre } from '../genre.model';
-import { GenreService } from '../service/genre.service';
+import { Genre } from '../genre.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Injectable({ providedIn: 'root' })
-export class GenreRoutingResolveService implements Resolve<IGenre> {
-  constructor(protected service: GenreService, protected router: Router) {}
+export class GenreRoutingResolveService implements Resolve<IBotanicItem> {
+  constructor(protected service: BotanicItemService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IGenre> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(

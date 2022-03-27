@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { IGenre } from '../genre.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
 
 @Component({
   selector: 'jhi-genre-detail',
   templateUrl: './genre-detail.component.html',
 })
 export class GenreDetailComponent implements OnInit {
-  genre: IGenre | null = null;
+  genre: IBotanicItem | null = null;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

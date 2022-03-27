@@ -16,7 +16,7 @@
         </dd>
         <dt><span>Nom Latin</span></dt>
         <dd>
-          <span>{{ variete.nomLatin }}</span>
+          <span>{{ variete.nom }}</span>
         </dd>
         <dt><span>Conseil Culture</span></dt>
         <dd>
@@ -42,10 +42,10 @@
         <dd>
           <span>{{ variete.qualiteSol }}</span>
         </dd>
-        <dt><span>Genre</span></dt>
+        <dt><span>Espece</span></dt>
         <dd>
-          <div *ngIf="variete.genre">
-            <a [routerLink]="['/genre', variete.genre?.id, 'view']">{{ variete.genre?.nom }}</a>
+          <div *ngIf="variete.espece">
+            <a [routerLink]="['/espece', variete.espece?.id, 'view']">{{ variete.espece?.nom }}</a>
           </div>
         </dd>
       </dl>

@@ -45,7 +45,7 @@ public class VarieteMapperImpl implements VarieteMapper {
 	}
 
 	@Override
-	public VarieteDTO toDtoNomLatin(Variete variete) {
+	public VarieteDTO toDtoNom(Variete variete) {
 		// TODO Auto-generated method stub
 		return null;
 	}

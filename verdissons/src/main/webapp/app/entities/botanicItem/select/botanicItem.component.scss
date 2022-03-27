@@ -1,0 +1,17 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/cerulean/variables';
+@import '~bootstrap/scss/variables';
+
+
+.mark-botanic {
+    background-color: #c0e795;
+    color: black;
+    padding: 0;
+}
+
+.botanic-label-clickable {
+	cursor: pointer;
+	&:hover {
+    	background-color: #c0e795;
+    }
+}

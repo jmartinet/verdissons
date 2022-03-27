@@ -11,4 +11,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface FamilleRepository extends JpaRepository<Famille, Integer>, JpaSpecificationExecutor<Famille> {}
+public interface FamilleRepository extends JpaRepository<Famille, Long>, JpaSpecificationExecutor<Famille> {}

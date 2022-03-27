@@ -1,12 +1,9 @@
-export interface IFamille {
-  id?: number;
-  nom?: string | null;
-}
+import { IBotanicItem } from "../botanicItem/botanicItem.model";
 
-export class Famille implements IFamille {
+export class Famille implements IBotanicItem {
   constructor(public id?: number, public nom?: string | null) {}
 }
 
-export function getFamilleIdentifier(famille: IFamille): number | undefined {
+export function getFamilleIdentifier(famille: IBotanicItem): number | undefined {
   return famille.id;
 }

@@ -33,7 +33,7 @@
         <dt><span>Variete</span></dt>
         <dd>
           <div *ngIf="semence.variete">
-            <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nomLatin }}</a>
+            <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nom }}</a>
           </div>
         </dd>
       </dl>

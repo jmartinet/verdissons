@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { IEspece } from '../espece.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
 
 @Component({
   selector: 'jhi-espece-detail',
   templateUrl: './espece-detail.component.html',
 })
 export class EspeceDetailComponent implements OnInit {
-  espece: IEspece | null = null;
+  espece: IBotanicItem | null = null;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

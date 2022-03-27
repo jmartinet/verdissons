@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IGenre, getGenreIdentifier } from '../genre.model';
+import { getGenreIdentifier } from '../genre.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
 
-export type EntityResponseType = HttpResponse<IGenre>;
-export type EntityArrayResponseType = HttpResponse<IGenre[]>;
+export type EntityResponseType = HttpResponse<IBotanicItem>;
+export type EntityArrayResponseType = HttpResponse<IBotanicItem[]>;
 
 @Injectable({ providedIn: 'root' })
 export class GenreService {
@@ -16,33 +17,33 @@ export class GenreService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(genre: IGenre): Observable<EntityResponseType> {
-    return this.http.post<IGenre>(this.resourceUrl, genre, { observe: 'response' });
+  create(genre: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.post<IBotanicItem>(this.resourceUrl, genre, { observe: 'response' });
   }
 
-  update(genre: IGenre): Observable<EntityResponseType> {
-    return this.http.put<IGenre>(`${this.resourceUrl}/${getGenreIdentifier(genre) as number}`, genre, { observe: 'response' });
+  update(genre: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.put<IBotanicItem>(`${this.resourceUrl}/${getGenreIdentifier(genre) as number}`, genre, { observe: 'response' });
   }
 
-  partialUpdate(genre: IGenre): Observable<EntityResponseType> {
-    return this.http.patch<IGenre>(`${this.resourceUrl}/${getGenreIdentifier(genre) as number}`, genre, { observe: 'response' });
+  partialUpdate(genre: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.patch<IBotanicItem>(`${this.resourceUrl}/${getGenreIdentifier(genre) as number}`, genre, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IGenre>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<IBotanicItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IGenre[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<IBotanicItem[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addGenreToCollectionIfMissing(genreCollection: IGenre[], ...genresToCheck: (IGenre | null | undefined)[]): IGenre[] {
-    const genres: IGenre[] = genresToCheck.filter(isPresent);
+  addGenreToCollectionIfMissing(genreCollection: IBotanicItem[], ...genresToCheck: (IBotanicItem | null | undefined)[]): IBotanicItem[] {
+    const genres: IBotanicItem[] = genresToCheck.filter(isPresent);
     if (genres.length > 0) {
       const genreCollectionIdentifiers = genreCollection.map(genreItem => getGenreIdentifier(genreItem)!);
       const genresToAdd = genres.filter(genreItem => {

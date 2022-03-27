@@ -4,14 +4,15 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IEspece, Espece } from '../espece.model';
-import { EspeceService } from '../service/espece.service';
+import { Espece } from '../espece.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Injectable({ providedIn: 'root' })
-export class EspeceRoutingResolveService implements Resolve<IEspece> {
-  constructor(protected service: EspeceService, protected router: Router) {}
+export class EspeceRoutingResolveService implements Resolve<IBotanicItem> {
+  constructor(protected service: BotanicItemService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IEspece> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(

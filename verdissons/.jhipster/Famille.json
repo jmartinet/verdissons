@@ -12,5 +12,6 @@
   "pagination": "no",
   "readOnly": false,
   "relationships": [],
-  "service": "serviceClass"
+  "service": "serviceClass",
+  "skipClient": true
 }

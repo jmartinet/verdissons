@@ -1,32 +1,67 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-espece-heading" data-cy="EspeceCreateUpdateHeading">Create or edit a Espece</h2>
+	<div class="col-8">
+		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+			[formGroup]="editForm">
+			<h2 id="jhi-espece-heading" data-cy="EspeceCreateUpdateHeading">Create
+				or edit a Espece</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+			<div>
+				<jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-      </div>
+				<div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+					<label class="form-label" for="field_id">ID</label> <input
+						type="number" class="form-control" name="id" id="field_id"
+						data-cy="id" formControlName="id" [readonly]="true" />
+				</div>
 
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
-        </button>
+				<div class="row mb-3">
+					<label class="form-label" for="field_famille">Famille</label> 
+					<select
+						class="form-control" id="field_famille" data-cy="famille"
+						name="famille" formControlName="famille">
+						<option [ngValue]="null"></option>
+						<option
+							[ngValue]="familleOption.id === editForm.get('famille')!.value?.id ? editForm.get('famille')!.value : familleOption"
+							*ngFor="let familleOption of famillesSharedCollection; trackBy: trackFamilleById">
+							{{ familleOption.nom }}</option>
+					</select>
+				</div>
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_genre">Genre</label> <select
+						class="form-control" id="field_genre" data-cy="genre" name="genre"
+						formControlName="genre">
+						<option [ngValue]="null"></option>
+						<option
+							[ngValue]="genreOption.id === editForm.get('genre')!.value?.id ? editForm.get('genre')!.value : genreOption"
+							*ngFor="let genreOption of genresSharedCollection; trackBy: trackGenreById">
+							{{ genreOption.nom }}</option>
+					</select>
+				</div>
+
+				<div class="row mb-3">
+					<label class="form-label" for="field_nom">Nom</label> 
+					<input
+						type="text" class="form-control" name="nom" id="field_nom"
+						data-cy="nom" formControlName="nom" />
+				</div>
+			</div>
+
+			<div>
+				<button type="button" id="cancel-save"
+					data-cy="entityCreateCancelButton" class="btn btn-secondary"
+					(click)="previousState()">
+					<fa-icon icon="ban"></fa-icon>
+					&nbsp;<span>Cancel</span>
+				</button>
+
+				<button type="submit" id="save-entity"
+					data-cy="entityCreateSaveButton"
+					[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+					<fa-icon icon="save"></fa-icon>
+					&nbsp;<span>Save</span>
+				</button>
+			</div>
+		</form>
+	</div>
 </div>

@@ -31,8 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class VarieteResourceIT {
 
-    private static final String DEFAULT_NOM_LATIN = "AAAAAAAAAA";
-    private static final String UPDATED_NOM_LATIN = "BBBBBBBBBB";
+    private static final String DEFAULT_NOM_ = "AAAAAAAAAA";
+    private static final String UPDATED_NOM_ = "BBBBBBBBBB";
 
     private static final String DEFAULT_CONSEIL_CULTURE = "AAAAAAAAAA";
     private static final String UPDATED_CONSEIL_CULTURE = "BBBBBBBBBB";
@@ -80,7 +80,7 @@ class VarieteResourceIT {
      */
     public static Variete createEntity(EntityManager em) {
         Variete variete = new Variete()
-            .nomLatin(DEFAULT_NOM_LATIN)
+            .nom(DEFAULT_NOM_)
             .conseilCulture(DEFAULT_CONSEIL_CULTURE)
             .culture(DEFAULT_CULTURE)
             .exposition(DEFAULT_EXPOSITION)
@@ -98,7 +98,7 @@ class VarieteResourceIT {
      */
     public static Variete createUpdatedEntity(EntityManager em) {
         Variete variete = new Variete()
-            .nomLatin(UPDATED_NOM_LATIN)
+            .nom(UPDATED_NOM_)
             .conseilCulture(UPDATED_CONSEIL_CULTURE)
             .culture(UPDATED_CULTURE)
             .exposition(UPDATED_EXPOSITION)
@@ -127,7 +127,7 @@ class VarieteResourceIT {
         List<Variete> varieteList = varieteRepository.findAll();
         assertThat(varieteList).hasSize(databaseSizeBeforeCreate + 1);
         Variete testVariete = varieteList.get(varieteList.size() - 1);
-        assertThat(testVariete.getNomLatin()).isEqualTo(DEFAULT_NOM_LATIN);
+        assertThat(testVariete.getNom()).isEqualTo(DEFAULT_NOM_);
         assertThat(testVariete.getConseilCulture()).isEqualTo(DEFAULT_CONSEIL_CULTURE);
         assertThat(testVariete.getCulture()).isEqualTo(DEFAULT_CULTURE);
         assertThat(testVariete.getExposition()).isEqualTo(DEFAULT_EXPOSITION);
@@ -167,7 +167,7 @@ class VarieteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(variete.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nomLatin").value(hasItem(DEFAULT_NOM_LATIN)))
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM_)))
             .andExpect(jsonPath("$.[*].conseilCulture").value(hasItem(DEFAULT_CONSEIL_CULTURE)))
             .andExpect(jsonPath("$.[*].culture").value(hasItem(DEFAULT_CULTURE)))
             .andExpect(jsonPath("$.[*].exposition").value(hasItem(DEFAULT_EXPOSITION)))
@@ -188,7 +188,7 @@ class VarieteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(variete.getId().intValue()))
-            .andExpect(jsonPath("$.nomLatin").value(DEFAULT_NOM_LATIN))
+            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM_))
             .andExpect(jsonPath("$.conseilCulture").value(DEFAULT_CONSEIL_CULTURE))
             .andExpect(jsonPath("$.culture").value(DEFAULT_CULTURE))
             .andExpect(jsonPath("$.exposition").value(DEFAULT_EXPOSITION))
@@ -217,7 +217,7 @@ class VarieteResourceIT {
         // Disconnect from session so that the updates on updatedVariete are not directly saved in db
         em.detach(updatedVariete);
         updatedVariete
-            .nomLatin(UPDATED_NOM_LATIN)
+            .nom(UPDATED_NOM_)
             .conseilCulture(UPDATED_CONSEIL_CULTURE)
             .culture(UPDATED_CULTURE)
             .exposition(UPDATED_EXPOSITION)
@@ -238,7 +238,7 @@ class VarieteResourceIT {
         List<Variete> varieteList = varieteRepository.findAll();
         assertThat(varieteList).hasSize(databaseSizeBeforeUpdate);
         Variete testVariete = varieteList.get(varieteList.size() - 1);
-        assertThat(testVariete.getNomLatin()).isEqualTo(UPDATED_NOM_LATIN);
+        assertThat(testVariete.getNom()).isEqualTo(UPDATED_NOM_);
         assertThat(testVariete.getConseilCulture()).isEqualTo(UPDATED_CONSEIL_CULTURE);
         assertThat(testVariete.getCulture()).isEqualTo(UPDATED_CULTURE);
         assertThat(testVariete.getExposition()).isEqualTo(UPDATED_EXPOSITION);
@@ -325,7 +325,7 @@ class VarieteResourceIT {
         partialUpdatedVariete.setId(variete.getId());
 
         partialUpdatedVariete
-            .nomLatin(UPDATED_NOM_LATIN)
+            .nom(UPDATED_NOM_)
             .conseilCulture(UPDATED_CONSEIL_CULTURE)
             .culture(UPDATED_CULTURE)
             .exposition(UPDATED_EXPOSITION)
@@ -343,7 +343,7 @@ class VarieteResourceIT {
         List<Variete> varieteList = varieteRepository.findAll();
         assertThat(varieteList).hasSize(databaseSizeBeforeUpdate);
         Variete testVariete = varieteList.get(varieteList.size() - 1);
-        assertThat(testVariete.getNomLatin()).isEqualTo(UPDATED_NOM_LATIN);
+        assertThat(testVariete.getNom()).isEqualTo(UPDATED_NOM_);
         assertThat(testVariete.getConseilCulture()).isEqualTo(UPDATED_CONSEIL_CULTURE);
         assertThat(testVariete.getCulture()).isEqualTo(UPDATED_CULTURE);
         assertThat(testVariete.getExposition()).isEqualTo(UPDATED_EXPOSITION);
@@ -365,7 +365,7 @@ class VarieteResourceIT {
         partialUpdatedVariete.setId(variete.getId());
 
         partialUpdatedVariete
-            .nomLatin(UPDATED_NOM_LATIN)
+            .nom(UPDATED_NOM_)
             .conseilCulture(UPDATED_CONSEIL_CULTURE)
             .culture(UPDATED_CULTURE)
             .exposition(UPDATED_EXPOSITION)
@@ -385,7 +385,7 @@ class VarieteResourceIT {
         List<Variete> varieteList = varieteRepository.findAll();
         assertThat(varieteList).hasSize(databaseSizeBeforeUpdate);
         Variete testVariete = varieteList.get(varieteList.size() - 1);
-        assertThat(testVariete.getNomLatin()).isEqualTo(UPDATED_NOM_LATIN);
+        assertThat(testVariete.getNom()).isEqualTo(UPDATED_NOM_);
         assertThat(testVariete.getConseilCulture()).isEqualTo(UPDATED_CONSEIL_CULTURE);
         assertThat(testVariete.getCulture()).isEqualTo(UPDATED_CULTURE);
         assertThat(testVariete.getExposition()).isEqualTo(UPDATED_EXPOSITION);

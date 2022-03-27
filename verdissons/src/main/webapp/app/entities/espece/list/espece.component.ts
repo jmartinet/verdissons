@@ -4,18 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IEspece } from '../espece.model';
-
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { EspeceService } from '../service/espece.service';
 import { EspeceDeleteDialogComponent } from '../delete/espece-delete-dialog.component';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
 	selector: 'jhi-espece',
 	templateUrl: './espece.component.html',
 })
 export class EspeceComponent implements OnInit {
-	especes?: IEspece[];
+	especes?: IBotanicItem[];
 	isLoading = false;
 	totalItems = 0;
 	itemsPerPage = ITEMS_PER_PAGE;
@@ -23,9 +22,11 @@ export class EspeceComponent implements OnInit {
 	predicate!: string;
 	ascending!: boolean;
 	ngbPaginationPage = 1;
+	
+	searchValue: string | undefined;
 
 	constructor(
-		protected especeService: EspeceService,
+		protected especeService: BotanicItemService,
 		protected activatedRoute: ActivatedRoute,
 		protected router: Router,
 		protected modalService: NgbModal
@@ -36,14 +37,37 @@ export class EspeceComponent implements OnInit {
 		const pageToLoad: number = page ?? this.page ?? 1;
 
 		this.especeService.query({
+				'type.equals': 'ESPECE',
 				page: pageToLoad - 1,
 				size: this.itemsPerPage,
 				sort: this.sort(),
 			})
 			.subscribe({
-				next: (res: HttpResponse<IEspece[]>) => {
+				next: (res: HttpResponse<IBotanicItem[]>) => {
 					this.isLoading = false;
 					this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+				},
+				error: () => {
+					this.isLoading = false;
+					this.onError();
+				},
+			});
+	}
+
+	search(): void {
+		const val = this.searchValue;
+		this.isLoading = true;
+		const pageToLoad = 1;
+		this.especeService.query({
+				'libelle.contains': val,
+				page: pageToLoad - 1,
+				size: this.itemsPerPage,
+				sort: this.sort(),
+			})
+			.subscribe({
+				next: (res: HttpResponse<IBotanicItem[]>) => {
+					this.isLoading = false;
+					this.onSuccess(res.body, res.headers, pageToLoad, false);
 				},
 				error: () => {
 					this.isLoading = false;
@@ -56,11 +80,11 @@ export class EspeceComponent implements OnInit {
 		this.handleNavigation();
 	}
 
-	trackId(index: number, item: IEspece): number {
+	trackId(index: number, item: IBotanicItem): number {
 		return item.id!;
 	}
 
-	delete(espece: IEspece): void {
+	delete(espece: IBotanicItem): void {
 		const modalRef = this.modalService.open(EspeceDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
 		modalRef.componentInstance.espece = espece;
 		// unsubscribe not needed because closed completes on modal close
@@ -94,7 +118,7 @@ export class EspeceComponent implements OnInit {
 		});
 	}
 
-	protected onSuccess(data: IEspece[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+	protected onSuccess(data: IBotanicItem[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
 		this.totalItems = Number(headers.get('X-Total-Count'));
 		this.page = page;
 		if (navigate) {

@@ -14,7 +14,7 @@ public class EspeceMapper {
 	
 	@Named("nom")
 	public EspeceDTO entityToDTO(Espece espece) {
-		return new BotanicItemMapper<Espece, EspeceDTO>().toDto(espece);
+		return (EspeceDTO) new BotanicItemMapper().toDto(espece);
 	}
 	
 }

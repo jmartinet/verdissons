@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IGenre } from '../genre.model';
-import { GenreService } from '../service/genre.service';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
   templateUrl: './genre-delete-dialog.component.html',
 })
 export class GenreDeleteDialogComponent {
-  genre?: IGenre;
+  genre?: IBotanicItem;
 
-  constructor(protected genreService: GenreService, protected activeModal: NgbActiveModal) {}
+  constructor(protected genreService: BotanicItemService, protected activeModal: NgbActiveModal) {}
 
   cancel(): void {
     this.activeModal.dismiss();

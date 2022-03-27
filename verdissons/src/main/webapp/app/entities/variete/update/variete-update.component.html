@@ -12,8 +12,8 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" for="field_nomLatin">Nom Latin</label>
-          <input type="text" class="form-control" name="nomLatin" id="field_nomLatin" data-cy="nomLatin" formControlName="nomLatin" />
+          <label class="form-label" for="field_nom">Nom </label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
         </div>
 
         <div class="row mb-3">
@@ -66,19 +66,11 @@
             formControlName="qualiteSol"
           />
         </div>
-
         <div class="row mb-3">
-          <label class="form-label" for="field_genre">Genre</label>
-          <select class="form-control" id="field_genre" data-cy="genre" name="genre" formControlName="genre">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="genreOption.id === editForm.get('genre')!.value?.id ? editForm.get('genre')!.value : genreOption"
-              *ngFor="let genreOption of genresSharedCollection; trackBy: trackGenreById"
-            >
-              {{ genreOption.nom }}
-            </option>
-          </select>
+          <p>{{ editForm.get('espece')?.value | json }}</p>
         </div>
+        <jhi-botanic-item formGroupName="espece"></jhi-botanic-item>
+
       </div>
 
       <div>

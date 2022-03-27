@@ -1,15 +1,9 @@
-import { IGenre } from "../genre/genre.model";
+import { IBotanicItem } from "../botanicItem/botanicItem.model";
 
-export interface IEspece {
-  id?: number;
-  nom?: string | null;
-  parent?: IGenre | null;
+export class Espece implements IBotanicItem {
+  constructor(public id?: number, public nom?: string | null, public parent?: IBotanicItem | null) {}
 }
 
-export class Espece implements IEspece {
-  constructor(public id?: number, public nom?: string | null, public genre?: IGenre | null) {}
-}
-
-export function getEspeceIdentifier(espece: IEspece): number | undefined {
+export function getEspeceIdentifier(espece: IBotanicItem): number | undefined {
   return espece.id;
 }

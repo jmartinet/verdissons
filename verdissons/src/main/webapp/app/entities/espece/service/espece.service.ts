@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IEspece, getEspeceIdentifier } from '../espece.model';
+import { getEspeceIdentifier } from '../espece.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
 
-export type EntityResponseType = HttpResponse<IEspece>;
-export type EntityArrayResponseType = HttpResponse<IEspece[]>;
+export type EntityResponseType = HttpResponse<IBotanicItem>;
+export type EntityArrayResponseType = HttpResponse<IBotanicItem[]>;
 
 @Injectable({ providedIn: 'root' })
 export class EspeceService {
@@ -16,33 +17,33 @@ export class EspeceService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(espece: IEspece): Observable<EntityResponseType> {
-    return this.http.post<IEspece>(this.resourceUrl, espece, { observe: 'response' });
+  create(espece: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.post<IBotanicItem>(this.resourceUrl, espece, { observe: 'response' });
   }
 
-  update(espece: IEspece): Observable<EntityResponseType> {
-    return this.http.put<IEspece>(`${this.resourceUrl}/${getEspeceIdentifier(espece) as number}`, espece, { observe: 'response' });
+  update(espece: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.put<IBotanicItem>(`${this.resourceUrl}/${getEspeceIdentifier(espece) as number}`, espece, { observe: 'response' });
   }
 
-  partialUpdate(espece: IEspece): Observable<EntityResponseType> {
-    return this.http.patch<IEspece>(`${this.resourceUrl}/${getEspeceIdentifier(espece) as number}`, espece, { observe: 'response' });
+  partialUpdate(espece: IBotanicItem): Observable<EntityResponseType> {
+    return this.http.patch<IBotanicItem>(`${this.resourceUrl}/${getEspeceIdentifier(espece) as number}`, espece, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IEspece>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<IBotanicItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IEspece[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<IBotanicItem[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addEspeceToCollectionIfMissing(especeCollection: IEspece[], ...especesToCheck: (IEspece | null | undefined)[]): IEspece[] {
-    const especes: IEspece[] = especesToCheck.filter(isPresent);
+  addEspeceToCollectionIfMissing(especeCollection: IBotanicItem[], ...especesToCheck: (IBotanicItem | null | undefined)[]): IBotanicItem[] {
+    const especes: IBotanicItem[] = especesToCheck.filter(isPresent);
     if (especes.length > 0) {
       const especeCollectionIdentifiers = especeCollection.map(especeItem => getEspeceIdentifier(especeItem)!);
       const especesToAdd = especes.filter(especeItem => {

@@ -21,7 +21,7 @@ describe('Variete Service', () => {
 
     elemDefault = {
       id: 0,
-      nomLatin: 'AAAAAAA',
+      nom: 'AAAAAAA',
       conseilCulture: 'AAAAAAA',
       culture: 'AAAAAAA',
       exposition: 'AAAAAAA',
@@ -63,7 +63,7 @@ describe('Variete Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          nomLatin: 'BBBBBB',
+          nom: 'BBBBBB',
           conseilCulture: 'BBBBBB',
           culture: 'BBBBBB',
           exposition: 'BBBBBB',
@@ -86,7 +86,7 @@ describe('Variete Service', () => {
     it('should partial update a Variete', () => {
       const patchObject = Object.assign(
         {
-          nomLatin: 'BBBBBB',
+          nom: 'BBBBBB',
           culture: 'BBBBBB',
           qualiteSol: 'BBBBBB',
         },
@@ -108,7 +108,7 @@ describe('Variete Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          nomLatin: 'BBBBBB',
+          nom: 'BBBBBB',
           conseilCulture: 'BBBBBB',
           culture: 'BBBBBB',
           exposition: 'BBBBBB',

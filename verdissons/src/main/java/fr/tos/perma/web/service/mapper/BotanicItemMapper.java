@@ -12,10 +12,9 @@ import fr.tos.perma.web.service.dto.FamilleDTO;
 import fr.tos.perma.web.service.dto.GenreDTO;
 
 @Mapper(componentModel = "spring")
-public class BotanicItemMapper<E extends BotanicItem, D extends BotanicItemDTO> {
+public class BotanicItemMapper {
 
-	@SuppressWarnings("unchecked")
-	public E toEntity(D dto) {
+	public BotanicItem toEntity(BotanicItemDTO dto) {
 		BotanicItem entity = null;
 		if (dto == null) {
 			return null;
@@ -25,19 +24,18 @@ public class BotanicItemMapper<E extends BotanicItem, D extends BotanicItemDTO> 
 			entity = new Famille();
 		} else if (dto instanceof GenreDTO) {
 			entity = new Genre();
-			parent = new BotanicItemMapper<Famille, FamilleDTO>().toEntity((FamilleDTO) dto.getParent());
+			parent = new BotanicItemMapper().toEntity((FamilleDTO) dto.getParent());
 		} else if (dto instanceof EspeceDTO) {
 			entity = new Espece();
-			parent = new BotanicItemMapper<Genre, GenreDTO>().toEntity((GenreDTO) dto.getParent());
+			parent = new BotanicItemMapper().toEntity((GenreDTO) dto.getParent());
 		}
 		entity.setId(dto.getId());
 		entity.setLibelle(dto.getNom());
 		entity.setParent(parent);
-		return (E) entity;
+		return (BotanicItem) entity;
 	}
 
-	@SuppressWarnings("unchecked")
-	public D toDto(E entity) {
+	public BotanicItemDTO toDto(BotanicItem entity) {
 		BotanicItemDTO dto = null;
 		if (entity == null) {
 			return null;
@@ -47,15 +45,16 @@ public class BotanicItemMapper<E extends BotanicItem, D extends BotanicItemDTO> 
 			dto = new FamilleDTO();
 		} else if (entity instanceof Genre) {
 			dto = new GenreDTO();
-			parent = new BotanicItemMapper<Famille, FamilleDTO>().toDto((Famille) entity.getParent());
+			parent = new BotanicItemMapper().toDto((Famille) entity.getParent());
 		} else if (entity instanceof Espece) {
 			dto = new EspeceDTO();
-			parent = new BotanicItemMapper<Genre, GenreDTO>().toDto((Genre) entity.getParent());
+			parent = new BotanicItemMapper().toDto((Genre) entity.getParent());
 		}
 		dto.setId(entity.getId());
 		dto.setNom(entity.getLibelle());
 		dto.setParent(parent);
-		return (D) dto;
+		dto.setType(entity.getType());
+		return (BotanicItemDTO) dto;
 	}
 
 }

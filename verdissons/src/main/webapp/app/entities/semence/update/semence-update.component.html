@@ -74,7 +74,7 @@
               [ngValue]="varieteOption.id === editForm.get('variete')!.value?.id ? editForm.get('variete')!.value : varieteOption"
               *ngFor="let varieteOption of varietesSharedCollection; trackBy: trackVarieteById"
             >
-              {{ varieteOption.nomLatin }}
+              {{ varieteOption.nom }}
             </option>
           </select>
         </div>

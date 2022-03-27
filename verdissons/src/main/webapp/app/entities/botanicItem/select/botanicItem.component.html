@@ -1,0 +1,26 @@
+<div class="row mb-3" [formGroup]="editForm">
+	<label class="form-label" for="field_botanicItem">Classification</label> 
+	<input
+		type="text" class="form-control" name="searchValue" id="field_nom"
+		data-cy="searchValue" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"
+		(keyup)="search($event)" />
+	<div class="table-responsive" id="entities"
+		*ngIf="itemsSharedCollection && itemsSharedCollection.length > 0">
+		<table class="table table-striped" aria-describedby="page-heading">
+			<thead>
+				<tr>
+					<th scope="col"><span>Familles</span></th>
+					<th scope="col"><span>Genres</span></th>
+					<th scope="col"><span>Especes</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of itemsSharedCollection trackBy: trackId"	data-cy="entityTable">
+					<td (click)="selectFamille(item)" class="botanic-label-clickable" [innerHtml]=getFamilleNom(item)></td>
+					<td (click)="selectGenre(item)" class="botanic-label-clickable" [innerHtml]=getGenreNom(item)></td>
+					<td (click)="selectEspece(item)" class="botanic-label-clickable" [innerHtml]=getEspeceNom(item)></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

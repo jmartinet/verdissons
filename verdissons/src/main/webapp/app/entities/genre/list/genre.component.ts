@@ -4,18 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IGenre } from '../genre.model';
-
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { GenreService } from '../service/genre.service';
 import { GenreDeleteDialogComponent } from '../delete/genre-delete-dialog.component';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
 	selector: 'jhi-genre',
 	templateUrl: './genre.component.html',
 })
 export class GenreComponent implements OnInit {
-	genres?: IGenre[];
+	genres?: IBotanicItem[];
 	isLoading = false;
 	totalItems = 0;
 	itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +24,7 @@ export class GenreComponent implements OnInit {
 	ngbPaginationPage = 1;
 
 	constructor(
-		protected genreService: GenreService,
+		protected genreService: BotanicItemService,
 		protected activatedRoute: ActivatedRoute,
 		protected router: Router,
 		protected modalService: NgbModal
@@ -36,12 +35,13 @@ export class GenreComponent implements OnInit {
 		const pageToLoad: number = page ?? this.page ?? 1;
 
 		this.genreService.query({
+				'type.equals': 'GENRE',
 				page: pageToLoad - 1,
 				size: this.itemsPerPage,
 				sort: this.sort(),
 			})
 			.subscribe({
-			next: (res: HttpResponse<IGenre[]>) => {
+			next: (res: HttpResponse<IBotanicItem[]>) => {
 				this.isLoading = false;
 					this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
 			},
@@ -56,11 +56,11 @@ export class GenreComponent implements OnInit {
 		this.handleNavigation();
 	}
 
-	trackId(index: number, item: IGenre): number {
+	trackId(index: number, item: IBotanicItem): number {
 		return item.id!;
 	}
 
-	delete(genre: IGenre): void {
+	delete(genre: IBotanicItem): void {
 		const modalRef = this.modalService.open(GenreDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
 		modalRef.componentInstance.genre = genre;
 		// unsubscribe not needed because closed completes on modal close
@@ -94,7 +94,7 @@ export class GenreComponent implements OnInit {
 		});
 	}
 
-	protected onSuccess(data: IGenre[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+	protected onSuccess(data: IBotanicItem[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
 		this.totalItems = Number(headers.get('X-Total-Count'));
 		this.page = page;
 		if (navigate) {

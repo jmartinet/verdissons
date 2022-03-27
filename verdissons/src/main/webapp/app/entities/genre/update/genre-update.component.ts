@@ -5,10 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { IGenre, Genre } from '../genre.model';
-import { GenreService } from '../service/genre.service';
-import { IFamille } from 'app/entities/famille/famille.model';
-import { FamilleService } from 'app/entities/famille/service/famille.service';
+import { Genre } from '../genre.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
   selector: 'jhi-genre-update',
@@ -17,7 +16,7 @@ import { FamilleService } from 'app/entities/famille/service/famille.service';
 export class GenreUpdateComponent implements OnInit {
   isSaving = false;
 
-  famillesSharedCollection: IFamille[] = [];
+  famillesSharedCollection: IBotanicItem[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -26,8 +25,7 @@ export class GenreUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected genreService: GenreService,
-    protected familleService: FamilleService,
+    protected botanicItemService: BotanicItemService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -48,17 +46,17 @@ export class GenreUpdateComponent implements OnInit {
     this.isSaving = true;
     const genre = this.createFromForm();
     if (genre.id !== undefined) {
-      this.subscribeToSaveResponse(this.genreService.update(genre));
+      this.subscribeToSaveResponse(this.botanicItemService.update(genre));
     } else {
-      this.subscribeToSaveResponse(this.genreService.create(genre));
+      this.subscribeToSaveResponse(this.botanicItemService.create(genre));
     }
   }
 
-  trackFamilleById(index: number, item: IFamille): number {
+  trackFamilleById(index: number, item: IBotanicItem): number {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IGenre>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IBotanicItem>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -77,27 +75,27 @@ export class GenreUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(genre: IGenre): void {
+  protected updateForm(genre: IBotanicItem): void {
     this.editForm.patchValue({
       id: genre.id,
       nom: genre.nom,
       famille: genre.parent,
     });
 
-    this.famillesSharedCollection = this.familleService.addFamilleToCollectionIfMissing(this.famillesSharedCollection, genre.parent);
+    this.famillesSharedCollection = this.botanicItemService.addBotanicItemToCollectionIfMissing(this.famillesSharedCollection, genre.parent);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.familleService
-      .query()
-      .pipe(map((res: HttpResponse<IFamille[]>) => res.body ?? []))
+    this.botanicItemService
+      .query({'type.equals': 'FAMILLE'})
+      .pipe(map((res: HttpResponse<IBotanicItem[]>) => res.body ?? []))
       .pipe(
-        map((familles: IFamille[]) => this.familleService.addFamilleToCollectionIfMissing(familles, this.editForm.get('famille')!.value))
+        map((familles: IBotanicItem[]) => this.botanicItemService.addBotanicItemToCollectionIfMissing(familles, this.editForm.get('famille')!.value))
       )
-      .subscribe((familles: IFamille[]) => (this.famillesSharedCollection = familles));
+      .subscribe((familles: IBotanicItem[]) => (this.famillesSharedCollection = familles));
   }
 
-  protected createFromForm(): IGenre {
+  protected createFromForm(): IBotanicItem {
     return {
       ...new Genre(),
       id: this.editForm.get(['id'])!.value,

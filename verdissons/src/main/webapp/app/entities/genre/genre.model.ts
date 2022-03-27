@@ -1,15 +1,9 @@
-import { IFamille } from 'app/entities/famille/famille.model';
+import { IBotanicItem } from '../botanicItem/botanicItem.model';
 
-export interface IGenre {
-  id?: number;
-  nom?: string | null;
-  parent?: IFamille | null;
+export class Genre implements IBotanicItem {
+  constructor(public id?: number, public nom?: string | null, public parent?: IBotanicItem | null) {}
 }
 
-export class Genre implements IGenre {
-  constructor(public id?: number, public nom?: string | null, public famille?: IFamille | null) {}
-}
-
-export function getGenreIdentifier(genre: IGenre): number | undefined {
+export function getGenreIdentifier(genre: IBotanicItem): number | undefined {
   return genre.id;
 }

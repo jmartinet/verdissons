@@ -1,0 +1,55 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="HP (generated)" id="1648388107994-10">
+        <createTable tableName="graine">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="grainePK"/>
+            </column>
+            <column name="date" type="date"/>
+            <column name="quantite" type="BIGINT"/>
+            <column name="cultivar_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-11">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-12">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority" validate="true"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-13">
+        <addForeignKeyConstraint baseColumnNames="cultivar_id" baseTableName="graine" constraintName="FKfmks0r23jnjjy9hmyku03wk0b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cultivar" validate="true"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-14">
+        <addForeignKeyConstraint baseColumnNames="espece_id" baseTableName="variete" constraintName="FKng51qawbguh5nqbnrmklbveqd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="botanic_items" validate="true"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-15">
+        <dropColumn columnName="periode_recolte" tableName="variete"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-1">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="conseil" tableName="periode_reproduction"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-2">
+        <dropNotNullConstraint columnDataType="bigint" columnName="cultivar_id" tableName="periode_reproduction"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-3">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="description" tableName="cultivar"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-4">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="nom" tableName="cultivar"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-5">
+        <dropNotNullConstraint columnDataType="date" columnName="periode_debut" tableName="periode_reproduction"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-6">
+        <dropNotNullConstraint columnDataType="date" columnName="periode_fin" tableName="periode_reproduction"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-7">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="type" tableName="periode_reproduction"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-8">
+        <dropNotNullConstraint columnDataType="bigint" columnName="variete_id" tableName="cultivar"/>
+    </changeSet>
+    <changeSet author="HP (generated)" id="1648388107994-9">
+        <dropNotNullConstraint columnDataType="bigint" columnName="variete_id" tableName="periode_reproduction"/>
+    </changeSet>
+</databaseChangeLog>

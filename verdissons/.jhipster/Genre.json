@@ -19,5 +19,6 @@
       "relationshipType": "many-to-one"
     }
   ],
-  "service": "serviceClass"
+  "service": "serviceClass",
+  "skipClient": true
 }

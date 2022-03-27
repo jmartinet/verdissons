@@ -4,14 +4,15 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IFamille, Famille } from '../famille.model';
-import { FamilleService } from '../service/famille.service';
+import { Famille } from '../famille.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Injectable({ providedIn: 'root' })
-export class FamilleRoutingResolveService implements Resolve<IFamille> {
-  constructor(protected service: FamilleService, protected router: Router) {}
+export class FamilleRoutingResolveService implements Resolve<IBotanicItem> {
+  constructor(protected service: BotanicItemService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IFamille> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(

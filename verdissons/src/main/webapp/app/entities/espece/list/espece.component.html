@@ -28,14 +28,19 @@
     <span>No especes found</span>
   </div>
 
+	<input
+		type="text" class="form-control" name="searchValue" id="field_nom"
+		data-cy="searchValue" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"
+		(keyup)="search()" />
+		
   <div class="table-responsive" id="entities" *ngIf="especes && especes.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
           <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="genre"><span>Genre</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="famille"><span>Famille</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="libelle"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="parent.libelle"><span>Genre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="parent.parent.libelle"><span>Famille</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>

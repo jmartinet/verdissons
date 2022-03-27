@@ -52,7 +52,7 @@
           <td>{{ semence.periodeSemisFin | formatMediumDate }}</td>
           <td>
             <div *ngIf="semence.variete">
-              <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nomLatin }}</a>
+              <a [routerLink]="['/variete', semence.variete?.id, 'view']">{{ semence.variete?.nom }}</a>
             </div>
           </td>
           <td class="text-end">

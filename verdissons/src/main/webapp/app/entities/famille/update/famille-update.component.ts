@@ -5,8 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { IFamille, Famille } from '../famille.model';
-import { FamilleService } from '../service/famille.service';
+import { Famille } from '../famille.model';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
   selector: 'jhi-famille-update',
@@ -20,7 +21,7 @@ export class FamilleUpdateComponent implements OnInit {
     nom: [],
   });
 
-  constructor(protected familleService: FamilleService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(protected familleService: BotanicItemService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ famille }) => {
@@ -42,7 +43,7 @@ export class FamilleUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFamille>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IBotanicItem>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -61,14 +62,14 @@ export class FamilleUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(famille: IFamille): void {
+  protected updateForm(famille: IBotanicItem): void {
     this.editForm.patchValue({
       id: famille.id,
       nom: famille.nom,
     });
   }
 
-  protected createFromForm(): IFamille {
+  protected createFromForm(): IBotanicItem {
     return {
       ...new Famille(),
       id: this.editForm.get(['id'])!.value,

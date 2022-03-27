@@ -10,7 +10,7 @@ public class VarieteDTO implements Serializable {
 
     private Long id;
 
-    private String nomLatin;
+    private String nom;
 
     private String conseilCulture;
 
@@ -34,12 +34,12 @@ public class VarieteDTO implements Serializable {
         this.id = id;
     }
 
-    public String getNomLatin() {
-        return nomLatin;
+	public String getNom() {
+        return nom;
     }
 
-    public void setNomLatin(String nomLatin) {
-        this.nomLatin = nomLatin;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getConseilCulture() {
@@ -124,7 +124,7 @@ public class VarieteDTO implements Serializable {
     public String toString() {
         return "VarieteDTO{" +
             "id=" + getId() +
-            ", nomLatin='" + getNomLatin() + "'" +
+            ", nom='" + getNom() + "'" +
             ", conseilCulture='" + getConseilCulture() + "'" +
             ", culture='" + getCulture() + "'" +
             ", exposition='" + getExposition() + "'" +

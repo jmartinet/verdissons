@@ -17,8 +17,8 @@ import fr.tos.perma.web.domain.Genre;
  * Spring Data SQL repository for the Genre entity.
  */
 @Repository
-public interface GenreRepository extends JpaRepository<Genre, Integer>, JpaSpecificationExecutor<Genre> {
-	default Optional<Genre> findOneWithEagerRelationships(Integer id) {
+public interface GenreRepository extends JpaRepository<Genre, Long>, JpaSpecificationExecutor<Genre> {
+	default Optional<Genre> findOneWithEagerRelationships(Long id) {
 		return this.findOneWithToOneRelationships(id);
 	}
 
@@ -37,5 +37,5 @@ public interface GenreRepository extends JpaRepository<Genre, Integer>, JpaSpeci
 	List<Genre> findAllWithToOneRelationships();
 
 	@Query("select genre from Genre genre left join fetch genre.parent where genre.id =:id")
-	Optional<Genre> findOneWithToOneRelationships(@Param("id") Integer id);
+	Optional<Genre> findOneWithToOneRelationships(@Param("id") Long id);
 }

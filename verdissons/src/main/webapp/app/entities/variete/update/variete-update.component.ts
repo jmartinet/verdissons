@@ -7,118 +7,127 @@ import { finalize, map } from 'rxjs/operators';
 
 import { IVariete, Variete } from '../variete.model';
 import { VarieteService } from '../service/variete.service';
-import { IGenre } from 'app/entities/genre/genre.model';
-import { GenreService } from 'app/entities/genre/service/genre.service';
+import { IBotanicItem } from 'app/entities/botanicItem/botanicItem.model';
+import { BotanicItemService } from 'app/entities/botanicItem/service/botanicItem.service';
 
 @Component({
-  selector: 'jhi-variete-update',
-  templateUrl: './variete-update.component.html',
+	selector: 'jhi-variete-update',
+	templateUrl: './variete-update.component.html',
 })
 export class VarieteUpdateComponent implements OnInit {
-  isSaving = false;
 
-  genresSharedCollection: IGenre[] = [];
+	isSaving = false;
 
-  editForm = this.fb.group({
-    id: [],
-    nomLatin: [],
-    conseilCulture: [],
-    culture: [],
-    exposition: [],
-    besoinEau: [],
-    natureSol: [],
-    qualiteSol: [],
-    genre: [],
-  });
+	especesSharedCollection: IBotanicItem[] = [];
 
-  constructor(
-    protected varieteService: VarieteService,
-    protected genreService: GenreService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+	editForm =  this.fb.group({
+		id: [],
+		nom: [],
+		conseilCulture: [],
+		culture: [],
+		exposition: [],
+		besoinEau: [],
+		natureSol: [],
+		qualiteSol: [],
+		espece: this.fb.group({
+			id: [],
+			nom: [],
+			parent: [],
+			type: [],
+		}),
+	});
 
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ variete }) => {
-      this.updateForm(variete);
+	constructor(
+		protected varieteService: VarieteService,
+		protected especeService: BotanicItemService,
+		protected activatedRoute: ActivatedRoute,
+		protected fb: FormBuilder
+	) { }
 
-      this.loadRelationshipsOptions();
-    });
-  }
+	ngOnInit(): void {
+		this.activatedRoute.data.subscribe(({ variete }) => {
+			this.updateForm(variete);
 
-  previousState(): void {
-    window.history.back();
-  }
+			this.loadRelationshipsOptions();
+		});
+		this.editForm.controls.espece.valueChanges.subscribe((data) => {
+			data;
+		});
+	}
 
-  save(): void {
-    this.isSaving = true;
-    const variete = this.createFromForm();
-    if (variete.id !== undefined) {
-      this.subscribeToSaveResponse(this.varieteService.update(variete));
-    } else {
-      this.subscribeToSaveResponse(this.varieteService.create(variete));
-    }
-  }
+	previousState(): void {
+		window.history.back();
+	}
 
-  trackGenreById(index: number, item: IGenre): number {
-    return item.id!;
-  }
+	save(): void {
+		this.isSaving = true;
+		const variete = this.createFromForm();
+		if (variete.id !== undefined) {
+			this.subscribeToSaveResponse(this.varieteService.update(variete));
+		} else {
+			this.subscribeToSaveResponse(this.varieteService.create(variete));
+		}
+	}
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IVariete>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
-  }
+	trackEspeceById(index: number, item: IBotanicItem): number {
+		return item.id!;
+	}
 
-  protected onSaveSuccess(): void {
-    this.previousState();
-  }
+	protected subscribeToSaveResponse(result: Observable<HttpResponse<IVariete>>): void {
+		result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+			next: () => this.onSaveSuccess(),
+			error: () => this.onSaveError(),
+		});
+	}
 
-  protected onSaveError(): void {
-    // Api for inheritance.
-  }
+	protected onSaveSuccess(): void {
+		this.previousState();
+	}
 
-  protected onSaveFinalize(): void {
-    this.isSaving = false;
-  }
+	protected onSaveError(): void {
+		// Api for inheritance.
+	}
 
-  protected updateForm(variete: IVariete): void {
-    this.editForm.patchValue({
-      id: variete.id,
-      nomLatin: variete.nomLatin,
-      conseilCulture: variete.conseilCulture,
-      culture: variete.culture,
-      exposition: variete.exposition,
-      besoinEau: variete.besoinEau,
-      natureSol: variete.natureSol,
-      qualiteSol: variete.qualiteSol,
-      genre: variete.genre,
-    });
+	protected onSaveFinalize(): void {
+		this.isSaving = false;
+	}
 
-    this.genresSharedCollection = this.genreService.addGenreToCollectionIfMissing(this.genresSharedCollection, variete.genre);
-  }
+	protected updateForm(variete: IVariete): void {
+		this.editForm.patchValue({
+			id: variete.id,
+			nom: variete.nom,
+			conseilCulture: variete.conseilCulture,
+			culture: variete.culture,
+			exposition: variete.exposition,
+			besoinEau: variete.besoinEau,
+			natureSol: variete.natureSol,
+			qualiteSol: variete.qualiteSol,
+			espece: variete.espece,
+		});
 
-  protected loadRelationshipsOptions(): void {
-    this.genreService
-      .query()
-      .pipe(map((res: HttpResponse<IGenre[]>) => res.body ?? []))
-      .pipe(map((genres: IGenre[]) => this.genreService.addGenreToCollectionIfMissing(genres, this.editForm.get('genre')!.value)))
-      .subscribe((genres: IGenre[]) => (this.genresSharedCollection = genres));
-  }
+		this.especesSharedCollection = this.especeService.addBotanicItemToCollectionIfMissing(this.especesSharedCollection, variete.espece);
+	}
 
-  protected createFromForm(): IVariete {
-    return {
-      ...new Variete(),
-      id: this.editForm.get(['id'])!.value,
-      nomLatin: this.editForm.get(['nomLatin'])!.value,
-      conseilCulture: this.editForm.get(['conseilCulture'])!.value,
-      culture: this.editForm.get(['culture'])!.value,
-      exposition: this.editForm.get(['exposition'])!.value,
-      besoinEau: this.editForm.get(['besoinEau'])!.value,
-      natureSol: this.editForm.get(['natureSol'])!.value,
-      qualiteSol: this.editForm.get(['qualiteSol'])!.value,
-      genre: this.editForm.get(['genre'])!.value,
-    };
-  }
+	protected loadRelationshipsOptions(): void {
+		this.especeService
+			.query()
+			.pipe(map((res: HttpResponse<IBotanicItem[]>) => res.body ?? []))
+			.pipe(map((especes: IBotanicItem[]) => this.especeService.addBotanicItemToCollectionIfMissing(especes, this.editForm.get('espece')!.value)))
+			.subscribe((especes: IBotanicItem[]) => (this.especesSharedCollection = especes));
+	}
+
+	protected createFromForm(): IVariete {
+		return {
+			...new Variete(),
+			id: this.editForm.get(['id'])!.value,
+			nom: this.editForm.get(['nom'])!.value,
+			conseilCulture: this.editForm.get(['conseilCulture'])!.value,
+			culture: this.editForm.get(['culture'])!.value,
+			exposition: this.editForm.get(['exposition'])!.value,
+			besoinEau: this.editForm.get(['besoinEau'])!.value,
+			natureSol: this.editForm.get(['natureSol'])!.value,
+			qualiteSol: this.editForm.get(['qualiteSol'])!.value,
+			espece: this.editForm.get(['espece'])!.value,
+		};
+	}
 }

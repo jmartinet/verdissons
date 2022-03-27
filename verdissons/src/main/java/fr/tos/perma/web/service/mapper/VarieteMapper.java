@@ -12,9 +12,9 @@ public interface VarieteMapper extends EntityMapper<VarieteDTO, Variete> {
     @Mapping(target = "espece", source = "espece", qualifiedByName = "nom")
     VarieteDTO toDto(Variete s);
 
-    @Named("nomLatin")
+    @Named("nom")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "nomLatin", source = "nomLatin")
-    VarieteDTO toDtoNomLatin(Variete variete);
+    @Mapping(target = "nom", source = "nom")
+    VarieteDTO toDtoNom(Variete variete);
 }
