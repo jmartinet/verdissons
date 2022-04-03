@@ -2,20 +2,22 @@ package fr.tos.perma.web.service.dto;
 
 import java.io.Serializable;
 
+import fr.tos.perma.web.domain.TypeBotanicItem;
+
 public class BotanicItemDTO implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
-    private String nom;
+	private String nom;
 
-    private String type;
+	private TypeBotanicItem type;
 
-    private BotanicItemDTO parent;
+	private BotanicItemDTO parent;
 
 	public Long getId() {
 		return id;
@@ -41,11 +43,11 @@ public class BotanicItemDTO implements Serializable {
 		this.parent = parent;
 	}
 
-	public String getType() {
+	public TypeBotanicItem getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(TypeBotanicItem type) {
 		this.type = type;
 	}
 

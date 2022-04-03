@@ -15,46 +15,35 @@ import fr.tos.perma.web.service.dto.GenreDTO;
 public class BotanicItemMapper {
 
 	public BotanicItem toEntity(BotanicItemDTO dto) {
-		BotanicItem entity = null;
+		BotanicItem entity = new BotanicItem();
 		if (dto == null) {
 			return null;
 		}
 		BotanicItem parent = null;
-		if (dto instanceof FamilleDTO) {
-			entity = new Famille();
-		} else if (dto instanceof GenreDTO) {
-			entity = new Genre();
-			parent = new BotanicItemMapper().toEntity((FamilleDTO) dto.getParent());
-		} else if (dto instanceof EspeceDTO) {
-			entity = new Espece();
-			parent = new BotanicItemMapper().toEntity((GenreDTO) dto.getParent());
+		if (dto.getParent() != null) {
+			parent = new BotanicItemMapper().toEntity(dto.getParent());
 		}
 		entity.setId(dto.getId());
 		entity.setLibelle(dto.getNom());
 		entity.setParent(parent);
-		return (BotanicItem) entity;
+		entity.setType(dto.getType());
+		return entity;
 	}
 
 	public BotanicItemDTO toDto(BotanicItem entity) {
-		BotanicItemDTO dto = null;
+		BotanicItemDTO dto = new BotanicItemDTO();
 		if (entity == null) {
 			return null;
 		}
 		BotanicItemDTO parent = null;
-		if (entity instanceof Famille) {
-			dto = new FamilleDTO();
-		} else if (entity instanceof Genre) {
-			dto = new GenreDTO();
-			parent = new BotanicItemMapper().toDto((Famille) entity.getParent());
-		} else if (entity instanceof Espece) {
-			dto = new EspeceDTO();
-			parent = new BotanicItemMapper().toDto((Genre) entity.getParent());
+		if (entity.getParent() != null) {
+			parent = new BotanicItemMapper().toDto(entity.getParent());
 		}
 		dto.setId(entity.getId());
 		dto.setNom(entity.getLibelle());
 		dto.setParent(parent);
 		dto.setType(entity.getType());
-		return (BotanicItemDTO) dto;
+		return dto;
 	}
 
 }

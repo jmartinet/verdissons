@@ -1,6 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="EspeceHeading">
-    <span>Especes</span>
+    <span>Classification</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
@@ -37,8 +37,7 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="libelle"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="libelle"><span>Espece</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="parent.libelle"><span>Genre</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="parent.parent.libelle"><span>Famille</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
@@ -47,9 +46,8 @@
       <tbody>
         <tr *ngFor="let espece of especes; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/espece', espece.id, 'view']">{{ espece.id }}</a>
+          	<a [routerLink]="['/espece', espece.id, 'view']">{{ espece.nom }}</a>
           </td>
-          <td>{{ espece.nom }}</td>
           <td>
             <div *ngIf="espece.parent">
               <a [routerLink]="['/genre', espece.parent?.id, 'view']">{{ espece.parent?.nom }}</a>

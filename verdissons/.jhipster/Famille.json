@@ -13,5 +13,6 @@
   "readOnly": false,
   "relationships": [],
   "service": "serviceClass",
-  "skipClient": true
+  "skipClient": true,
+  "skipServer": true
 }

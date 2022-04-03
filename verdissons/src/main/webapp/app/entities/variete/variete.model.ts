@@ -9,6 +9,7 @@ export interface IVariete {
   besoinEau?: string | null;
   natureSol?: string | null;
   qualiteSol?: string | null;
+  image?: string | null;
   espece?: IBotanicItem | null;
 }
 
@@ -22,6 +23,7 @@ export class Variete implements IVariete {
     public besoinEau?: string | null,
     public natureSol?: string | null,
     public qualiteSol?: string | null,
+    public image?: string | null,
     public espece?: IBotanicItem | null
   ) {}
 }

@@ -28,8 +28,16 @@ export class BotanicItemService {
     return this.http.patch<IBotanicItem>(`${this.resourceUrl}/${getBotanicItemIdentifier(espece) as number}`, espece, { observe: 'response' });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IBotanicItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  findEspece(id: number): Observable<EntityResponseType> {
+    return this.http.get<IBotanicItem>(`${this.resourceUrl}/espece/${id}`, { observe: 'response' });
+  }
+
+  findGenre(id: number): Observable<EntityResponseType> {
+    return this.http.get<IBotanicItem>(`${this.resourceUrl}/genre/${id}`, { observe: 'response' });
+  }
+
+  findFamille(id: number): Observable<EntityResponseType> {
+    return this.http.get<IBotanicItem>(`${this.resourceUrl}/famille/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

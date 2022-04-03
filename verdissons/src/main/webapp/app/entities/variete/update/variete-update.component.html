@@ -1,93 +1,106 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-variete-heading" data-cy="VarieteCreateUpdateHeading">Create or edit a Variete</h2>
+	<div class="col-8">
+		<form name="editForm" role="form" novalidate (ngSubmit)="save()"
+			[formGroup]="editForm">
+			<h2 id="jhi-variete-heading" data-cy="VarieteCreateUpdateHeading">Create
+				or edit a Variete</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+			<div>
+				<jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_nom">Nom </label> <input
+						type="text" class="form-control" name="nom" id="field_nom"
+						data-cy="nom" formControlName="nom" />
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_nom">Nom </label>
-          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
-        </div>
+				<div class="row mb-3">
+					<jhi-image-selector [croppedImage]=imageToShow></jhi-image-selector>
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_conseilCulture">Conseil Culture</label>
-          <input
-            type="text"
-            class="form-control"
-            name="conseilCulture"
-            id="field_conseilCulture"
-            data-cy="conseilCulture"
-            formControlName="conseilCulture"
-          />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_nom">Conseil Culture</label>
+					<textarea class="form-control" name="conseilCulture"
+						id="field_conseilCulture" data-cy="conseilCulture"
+						formControlName="conseilCulture" rows="3"></textarea>
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_culture">Culture</label>
-          <input type="text" class="form-control" name="culture" id="field_culture" data-cy="culture" formControlName="culture" />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_culture">Culture</label> <input
+						type="text" class="form-control" name="culture" id="field_culture"
+						data-cy="culture" formControlName="culture" />
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_exposition">Exposition</label>
-          <input
-            type="text"
-            class="form-control"
-            name="exposition"
-            id="field_exposition"
-            data-cy="exposition"
-            formControlName="exposition"
-          />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_exposition">Exposition</label>
+					<input type="text" class="form-control" name="exposition"
+						id="field_exposition" data-cy="exposition"
+						formControlName="exposition" />
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_besoinEau">Besoin Eau</label>
-          <input type="text" class="form-control" name="besoinEau" id="field_besoinEau" data-cy="besoinEau" formControlName="besoinEau" />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_besoinEau">Besoin Eau</label>
+					<input type="text" class="form-control" name="besoinEau"
+						id="field_besoinEau" data-cy="besoinEau"
+						formControlName="besoinEau" />
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_natureSol">Nature Sol</label>
-          <input type="text" class="form-control" name="natureSol" id="field_natureSol" data-cy="natureSol" formControlName="natureSol" />
-        </div>
+				<div class="row mb-3">
+					<label class="form-label" for="field_natureSol">Nature Sol</label>
+					<input type="text" class="form-control" name="natureSol"
+						id="field_natureSol" data-cy="natureSol"
+						formControlName="natureSol" />
+				</div>
 
-        <div class="row mb-3">
-          <label class="form-label" for="field_qualiteSol">Qualite Sol</label>
-          <input
-            type="text"
-            class="form-control"
-            name="qualiteSol"
-            id="field_qualiteSol"
-            data-cy="qualiteSol"
-            formControlName="qualiteSol"
-          />
-        </div>
-        <div class="row mb-3">
-          <p>{{ editForm.get('espece')?.value | json }}</p>
-        </div>
-        <jhi-botanic-item formGroupName="espece"></jhi-botanic-item>
+				<div class="row mb-3">
+					<label class="form-label" for="field_qualiteSol">Qualite
+						Sol</label> <input type="text" class="form-control" name="qualiteSol"
+						id="field_qualiteSol" data-cy="qualiteSol"
+						formControlName="qualiteSol" />
+				</div>
+				<div class="row mb-3">
+					<p>{{ editForm.get('espece')?.value | json }}</p>
+				</div>
+				<jhi-botanic-item formGroupName="espece"></jhi-botanic-item>
 
-      </div>
+			</div>
 
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
-        </button>
+			<div>
+				<button type="button" id="cancel-save"
+					data-cy="entityCreateCancelButton" class="btn btn-secondary"
+					(click)="previousState()">
+					<fa-icon icon="ban"></fa-icon>
+					&nbsp;<span>Cancel</span>
+				</button>
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+				<button type="submit" id="save-entity"
+					data-cy="entityCreateSaveButton"
+					[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+					<fa-icon icon="save"></fa-icon>
+					&nbsp;<span>Save</span>
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Modal body text goes here.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

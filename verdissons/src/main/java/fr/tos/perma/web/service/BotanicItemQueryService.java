@@ -87,10 +87,23 @@ public class BotanicItemQueryService extends QueryService<BotanicItem> {
 						buildReferringEntitySpecification(criteria.getParent(), BotanicItem_.parent, BotanicItem_.id));
 			}
 			if (criteria.getType() != null) {
-				specification = specification.and(buildStringSpecification(criteria.getType(), BotanicItem_.type));
+				specification = specification.and(typeFilter(criteria.getType().getEquals()));
 			}
 		}
 		return specification;
+	}
+
+	private static Specification<BotanicItem> typeFilter(String libelle) {
+		return new Specification<BotanicItem>() {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Predicate toPredicate(Root<BotanicItem> root, CriteriaQuery<?> query, CriteriaBuilder cb) {	
+				return cb.equal(root.get(BotanicItem_.type).as(String.class),  libelle);
+			}
+
+		};
 	}
 
 	private static Specification<BotanicItem> libelleFilter(String libelle) {

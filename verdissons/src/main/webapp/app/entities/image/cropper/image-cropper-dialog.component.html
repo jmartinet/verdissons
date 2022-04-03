@@ -1,0 +1,25 @@
+<form *ngIf="imageFile" name="cropForm" (ngSubmit)="confirmCrop()">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="especeDeleteDialogHeading">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>    
+	<image-cropper [imageFile]="imageFile"
+		[maintainAspectRatio]="true" [aspectRatio]="1 / 1" format="png"
+		(imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+		(cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+    </button>
+
+    <button id="jhi-confirm-delete-espece" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-success">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span>Crop'it</span>
+    </button>
+  </div>
+</form>

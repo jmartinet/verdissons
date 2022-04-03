@@ -20,7 +20,10 @@ export class VarieteUpdateComponent implements OnInit {
 
 	especesSharedCollection: IBotanicItem[] = [];
 
-	editForm =  this.fb.group({
+	imageToShow: any;
+	isImageLoading = false;
+
+	editForm = this.fb.group({
 		id: [],
 		nom: [],
 		conseilCulture: [],
@@ -47,7 +50,9 @@ export class VarieteUpdateComponent implements OnInit {
 	ngOnInit(): void {
 		this.activatedRoute.data.subscribe(({ variete }) => {
 			this.updateForm(variete);
-
+			if (variete?.image) {
+				this.getImageFromService(variete.image);
+			}
 			this.loadRelationshipsOptions();
 		});
 		this.editForm.controls.espece.valueChanges.subscribe((data) => {
@@ -71,6 +76,27 @@ export class VarieteUpdateComponent implements OnInit {
 
 	trackEspeceById(index: number, item: IBotanicItem): number {
 		return item.id!;
+	}
+
+	getImageFromService(image: string): void {
+		this.isImageLoading = true;
+		this.varieteService.image(image).subscribe(data => {
+			if (data.body) {
+				this.createImageFromBlob(data.body);
+			}
+			this.isImageLoading = false;
+		}, error => {
+			this.isImageLoading = false;
+		});
+	}
+
+	createImageFromBlob(image: Blob): void {
+		const reader = new FileReader();
+		reader.addEventListener("load", () => {
+			this.imageToShow = reader.result;
+		}, false);
+
+		reader.readAsDataURL(image);
 	}
 
 	protected subscribeToSaveResponse(result: Observable<HttpResponse<IVariete>>): void {

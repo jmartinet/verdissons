@@ -7,6 +7,11 @@ import java.util.Objects;
  */
 public class EspeceDTO extends BotanicItemDTO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

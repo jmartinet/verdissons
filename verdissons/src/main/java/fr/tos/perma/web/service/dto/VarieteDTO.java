@@ -8,7 +8,12 @@ import java.util.Objects;
  */
 public class VarieteDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String nom;
 
@@ -24,7 +29,9 @@ public class VarieteDTO implements Serializable {
 
     private String qualiteSol;
 
-    private EspeceDTO espece;
+    private String image;
+
+    private BotanicItemDTO espece;
 
     public Long getId() {
         return id;
@@ -90,13 +97,21 @@ public class VarieteDTO implements Serializable {
         this.qualiteSol = qualiteSol;
     }
 
-    public EspeceDTO getEspece() {
+    public BotanicItemDTO getEspece() {
         return espece;
     }
 
-	public void setEspece(EspeceDTO genre) {
+	public void setEspece(BotanicItemDTO genre) {
         this.espece = genre;
     }
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
     @Override
     public boolean equals(Object o) {

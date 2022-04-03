@@ -1,0 +1,25 @@
+{
+  "changelogDate": "20220327195148",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Cultivar",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "variete",
+      "relationshipName": "variete",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "skipServer": true
+}

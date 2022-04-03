@@ -15,7 +15,7 @@ export class EspeceRoutingResolveService implements Resolve<IBotanicItem> {
   resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(
+      return this.service.findEspece(id).pipe(
         mergeMap((espece: HttpResponse<Espece>) => {
           if (espece.body) {
             return of(espece.body);

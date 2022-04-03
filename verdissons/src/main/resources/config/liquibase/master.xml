@@ -15,17 +15,8 @@
     <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309085356_added_entity_Famille.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309085732_added_entity_Genre.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309090201_added_entity_Variete.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309105051_added_entity_Semence.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220313001433_added_entity_Espece.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220313202345_added_entity_BotanicItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20220309085732_added_entity_constraints_Genre.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309090201_added_entity_constraints_Variete.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220309105051_added_entity_constraints_Semence.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20220313202345_added_entity_constraints_BotanicItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20220327175353_changelog.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

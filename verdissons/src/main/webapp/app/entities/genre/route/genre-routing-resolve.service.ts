@@ -15,7 +15,7 @@ export class GenreRoutingResolveService implements Resolve<IBotanicItem> {
   resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(
+      return this.service.findGenre(id).pipe(
         mergeMap((genre: HttpResponse<Genre>) => {
           if (genre.body) {
             return of(genre.body);

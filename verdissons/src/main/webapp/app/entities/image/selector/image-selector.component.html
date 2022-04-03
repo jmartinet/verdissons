@@ -1,0 +1,9 @@
+<div>
+	<label for="formFile" id="jhi-confirm-delete-espece" data-cy="entityConfirmDeleteButton" class="btn btn-dark custom-file-upload">
+      <fa-icon icon="upload" size="xs"></fa-icon>&nbsp;<span></span>
+    </label>
+	<input
+		class="form-control" type="file" id="formFile"
+		(change)="fileChangeEvent($event)">
+	<img class="ver-image" [src]="croppedImage" />
+</div>

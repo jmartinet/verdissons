@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,8 @@ public class BotanicItem {
 	private String libelle;
 
 	@Column(name = "botanic_type", insertable=false, updatable=false)
-	private String type;
+	@Enumerated(EnumType.STRING)
+	private TypeBotanicItem type;
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
@@ -56,7 +59,7 @@ public class BotanicItem {
 		this.parent = parent;
 	}
 
-	public String getType() {
+	public TypeBotanicItem getType() {
 		return type;
 	}
 
@@ -66,6 +69,10 @@ public class BotanicItem {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setType(TypeBotanicItem type) {
+		this.type = type;
 	}
 
 }

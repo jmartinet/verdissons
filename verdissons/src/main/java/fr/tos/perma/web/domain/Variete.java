@@ -29,6 +29,9 @@ public class Variete implements Serializable {
 	@Column(name = "nom")
 	private String nom;
 
+	@Column(name = "image")
+	private String image;
+
 	@Column(name = "conseil_culture")
 	private String conseilCulture;
 
@@ -203,5 +206,13 @@ public class Variete implements Serializable {
 
 	public void setCultivars(List<Cultivar> cultivars) {
 		this.cultivars = cultivars;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

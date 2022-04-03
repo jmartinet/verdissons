@@ -1,22 +1,26 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="variete">
-      <h2 data-cy="varieteDetailsHeading"><span>Variete</span></h2>
+      <h2 data-cy="varieteDetailsHeading"><span>{{ variete.nom }}</span></h2>
 
       <hr />
 
       <jhi-alert-error></jhi-alert-error>
 
       <jhi-alert></jhi-alert>
-
+	  <span><img class="images" [src]="imageToShow"/></span>
       <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
+        <dt><span>Espece</span></dt>
         <dd>
-          <span>{{ variete.id }}</span>
-        </dd>
-        <dt><span>Nom Latin</span></dt>
-        <dd>
-          <span>{{ variete.nom }}</span>
+          <div *ngIf="variete.espece">
+          	<a [routerLink]="['/espece', variete.espece?.id, 'view']">
+	        	<span>{{ variete.espece.parent?.parent?.nom }}</span>
+	        	<span><fa-icon icon="arrow-right"></fa-icon></span>
+	        	<span>{{ variete.espece.parent?.nom }}</span>
+	        	<span><fa-icon icon="arrow-right"></fa-icon></span>
+	        	<span>{{ variete.espece.nom }}</span>
+            </a>
+          </div>
         </dd>
         <dt><span>Conseil Culture</span></dt>
         <dd>
@@ -41,12 +45,6 @@
         <dt><span>Qualite Sol</span></dt>
         <dd>
           <span>{{ variete.qualiteSol }}</span>
-        </dd>
-        <dt><span>Espece</span></dt>
-        <dd>
-          <div *ngIf="variete.espece">
-            <a [routerLink]="['/espece', variete.espece?.id, 'view']">{{ variete.espece?.nom }}</a>
-          </div>
         </dd>
       </dl>
 

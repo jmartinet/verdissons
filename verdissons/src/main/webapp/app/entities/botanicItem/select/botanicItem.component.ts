@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { ControlValueAccessor, FormBuilder, FormGroup, FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IBotanicItem } from '../botanicItem.model';
 

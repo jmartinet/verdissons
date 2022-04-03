@@ -15,7 +15,7 @@ export class FamilleRoutingResolveService implements Resolve<IBotanicItem> {
   resolve(route: ActivatedRouteSnapshot): Observable<IBotanicItem> | Observable<never> {
     const id = route.params['id'];
     if (id) {
-      return this.service.find(id).pipe(
+      return this.service.findFamille(id).pipe(
         mergeMap((famille: HttpResponse<Famille>) => {
           if (famille.body) {
             return of(famille.body);

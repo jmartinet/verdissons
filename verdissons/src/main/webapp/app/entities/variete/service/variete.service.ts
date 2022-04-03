@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<IVariete[]>;
 @Injectable({ providedIn: 'root' })
 export class VarieteService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/varietes');
+  protected imageUrl = this.applicationConfigService.getEndpointFor('api/images/variete');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -36,6 +37,11 @@ export class VarieteService {
     const options = createRequestOption(req);
     return this.http.get<IVariete[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
+  image(path: string): Observable<HttpResponse<Blob>> {
+    return this.http.get(`${this.imageUrl}/${path}`, { observe: 'response', responseType: 'blob' });
+  }
+
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

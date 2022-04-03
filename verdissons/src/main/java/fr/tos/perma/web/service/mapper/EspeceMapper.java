@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
 import fr.tos.perma.web.domain.Espece;
+import fr.tos.perma.web.service.dto.BotanicItemDTO;
 import fr.tos.perma.web.service.dto.EspeceDTO;
 
 /**
@@ -13,8 +14,8 @@ import fr.tos.perma.web.service.dto.EspeceDTO;
 public class EspeceMapper {
 	
 	@Named("nom")
-	public EspeceDTO entityToDTO(Espece espece) {
-		return (EspeceDTO) new BotanicItemMapper().toDto(espece);
+	public BotanicItemDTO entityToDTO(Espece espece) {
+		return new BotanicItemMapper().toDto(espece);
 	}
 	
 }
